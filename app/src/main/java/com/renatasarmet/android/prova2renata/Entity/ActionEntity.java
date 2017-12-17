@@ -3,7 +3,7 @@ package com.renatasarmet.android.prova2renata.Entity;
 public class ActionEntity {
     private long id;
     private String name;
-    private String imageURL;
+    private String image;
     private String description;
     private String site;
 
@@ -15,8 +15,8 @@ public class ActionEntity {
         return name;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage () {
+        return image;
     }
 
     public String getDescription() {

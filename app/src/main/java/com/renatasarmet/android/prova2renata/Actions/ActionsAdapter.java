@@ -26,8 +26,9 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ViewHold
     OnRecyclerViewSelected onRecyclerViewSelected;
 
     //Construtor que recebe a lista
-    ActionsAdapter(List<ActionEntity> actionsList) {
+    ActionsAdapter(List<ActionEntity> actionsList, Context context) {
         this.actionsList = actionsList;
+        this.context = context;
     }
 
     //infla o componente view
@@ -43,7 +44,7 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ViewHold
         ActionEntity movieEntity = actionsList.get(position);
         holder.txActionName.setText(movieEntity.getName());
         Picasso.with(context)
-                .load(movieEntity.getImageURL())
+                .load(movieEntity.getImage())
                 .centerCrop()
                 .fit()
                 .into(holder.imgBackgroud);

@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 
 public interface SocialActionsService {
-    @GET("acoes_sociais")
-    Call<ActionListEntity> getActions(@Header("Authorization") String sessionToken);
+//    @GET("acoes_sociais")
+//    Call<ActionListEntity> getActions(@Header("Authorization") String sessionToken);
+    ActionListEntity getActions();
 }

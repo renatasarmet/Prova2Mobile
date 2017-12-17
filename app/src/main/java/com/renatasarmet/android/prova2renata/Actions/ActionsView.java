@@ -8,5 +8,5 @@ import java.util.List;
 public interface ActionsView {
     void updateList(List<ActionEntity> actionsList);
     void showMessage(String msg);
-    void setList(ActionListEntity actionListEntity);
+   // void setList(ActionListEntity actionListEntity);
 }
