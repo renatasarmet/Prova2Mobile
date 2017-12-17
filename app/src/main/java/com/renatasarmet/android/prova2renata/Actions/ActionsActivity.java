@@ -3,8 +3,11 @@ package com.renatasarmet.android.prova2renata.Actions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,6 +37,24 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
         actionsPresenter.updateList();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_download, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     @Override
     public void updateList(final List<ActionEntity> actionsList) {
@@ -58,6 +79,10 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
         // Criacao de gerenciador de layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvActions.setLayoutManager(layoutManager);
+
+        //inserindo separador de itens
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
+        rvActions.addItemDecoration(dividerItemDecoration);
 
     }
 

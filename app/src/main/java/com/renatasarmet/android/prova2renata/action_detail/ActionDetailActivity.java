@@ -3,6 +3,8 @@ package com.renatasarmet.android.prova2renata.action_detail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +48,30 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
 
         actionDetailPresenter = new ActionDetailPresenter(this);
         actionDetailPresenter.getActionDetail(id,name,image,description,site);
+
+        //insere opção Up Action na ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_download, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
 
