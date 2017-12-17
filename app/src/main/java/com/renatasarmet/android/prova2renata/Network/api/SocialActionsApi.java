@@ -1,19 +1,12 @@
 package com.renatasarmet.android.prova2renata.Network.api;
 
 
-import android.util.Log;
-
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
+import com.renatasarmet.android.prova2renata.Entity.ActionDetailEntity;
 import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 import com.renatasarmet.android.prova2renata.Network.service.SocialActionsService;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
 
 import retrofit2.Call;
 import retrofit2.Converter;
@@ -51,6 +44,10 @@ public class SocialActionsApi{
 
     public Call<ActionListEntity> getActions() {
         return socialActionsService.getActions();
+    }
+
+    public Call<ActionDetailEntity> getActionDetail(long actionId){
+        return socialActionsService.getActionDetail(actionId);
     }
 
 }

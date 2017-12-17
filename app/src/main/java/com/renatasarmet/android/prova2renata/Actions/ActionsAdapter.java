@@ -17,13 +17,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 
 public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ViewHolder> {
 
-    private Context context;
     private List<ActionEntity> actionsList;
     OnRecyclerViewSelected onRecyclerViewSelected;
+    private Context context;
 
     //Construtor que recebe a lista
     ActionsAdapter(List<ActionEntity> actionsList, Context context) {
@@ -41,10 +40,10 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ViewHold
     //seta os dados nas views
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ActionEntity movieEntity = actionsList.get(position);
-        holder.txActionName.setText(movieEntity.getName());
+        ActionEntity actionEntity = actionsList.get(position);
+        holder.txActionName.setText(actionEntity.getName());
         Picasso.with(context)
-                .load(movieEntity.getImage())
+                .load(actionEntity.getImage())
                 .centerCrop()
                 .fit()
                 .into(holder.imgBackgroud);
@@ -77,7 +76,6 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ViewHold
                 onRecyclerViewSelected.onClick(view, getAdapterPosition());
 
         }
-
     }
 
     public void setOnRecyclerViewSelected(OnRecyclerViewSelected onRecyclerViewSelected){

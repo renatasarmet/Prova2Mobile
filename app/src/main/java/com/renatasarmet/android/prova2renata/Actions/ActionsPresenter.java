@@ -1,13 +1,9 @@
 package com.renatasarmet.android.prova2renata.Actions;
 
-import android.support.annotation.NonNull;
-
-import com.google.gson.Gson;
 import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
 import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 import com.renatasarmet.android.prova2renata.Network.api.SocialActionsApi;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,7 +11,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActionsPresenter {
+
     private ActionsView actionsView;
+    private ActionListEntity actionListEntity;
     private List<ActionEntity> actionsList;
 
     ActionsPresenter(ActionsView actionsView){
@@ -28,14 +26,14 @@ public class ActionsPresenter {
             @Override
             public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
 
-                ActionListEntity acoesListEntity = response.body();
+                actionListEntity = response.body();
 
-                if(acoesListEntity != null && acoesListEntity.getActions() != null){
-
-                    actionsView.updateList(acoesListEntity.getActions());
+                if(actionListEntity != null && actionListEntity.getActions() != null){
+                    actionsList = actionListEntity.getActions();
+                    actionsView.updateList(actionsList);
 
                 } else{
-                    actionsView.showMessage("Falha no login");
+                    actionsView.showMessage("Falha no acesso");
                 }
             }
 
@@ -46,4 +44,7 @@ public class ActionsPresenter {
         });
     }
 
+    long getActionId(int position) throws IndexOutOfBoundsException {
+        return actionsList.get(position).getId();
+    }
 }
