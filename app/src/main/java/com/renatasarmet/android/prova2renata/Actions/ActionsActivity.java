@@ -4,9 +4,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
 import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 import com.renatasarmet.android.prova2renata.R;
@@ -24,6 +32,10 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
 
     ActionsPresenter actionsPresenter;
 
+    //private static final String ENDPOINT = "https://dl.dropboxusercontent.com/s/50vmlj7dhfaibpj/sociais.json";
+
+    private RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +43,9 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
         ButterKnife.bind(this);
 
         actionsPresenter = new ActionsPresenter(this);
-
-        //verifica se há json a ser carregado
-        String jsonActions = getIntent().getStringExtra("json_actions");
-        try {
-            actionsPresenter.updateList(jsonActions);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        actionsPresenter.updateList();
     }
+
 
     @Override
     public void updateList(List<ActionEntity> actionsList) {
@@ -49,12 +55,6 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(ActionsActivity.this, "Clique Rápido", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                Toast.makeText(ActionsActivity.this, "Clique Longo", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -70,23 +70,5 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
     public void showMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
-//
-//    @Override
-//    public void setList(ActionListEntity actionListEntity) {
-//        ActionsAdapter actionsAdapter = new ActionsAdapter(actionListEntity.getActions());
-//
-//        actionsAdapter.setOnRecyclerViewSelected(new OnRecyclerViewSelected() {
-//            @Override
-//            public void onClick(View view, int position) {
-//                Toast.makeText(ActionsActivity.this, "Clique rápido", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//                Toast.makeText(ActionsActivity.this, "Clique longo", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        rvActions.setAdapter(actionsAdapter);
-//    }
+
 }

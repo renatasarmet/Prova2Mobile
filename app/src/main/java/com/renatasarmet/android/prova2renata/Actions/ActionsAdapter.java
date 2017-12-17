@@ -78,15 +78,8 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ViewHold
 
         }
 
-        //seta o clique longo
-        @OnLongClick(R.id.container)
-        boolean onLongItemClick(View view){
-            if(onRecyclerViewSelected != null)
-                onRecyclerViewSelected.onLongClick(view, getAdapterPosition());
-
-            return true;
-        }
     }
+
     public void setOnRecyclerViewSelected(OnRecyclerViewSelected onRecyclerViewSelected){
         this.onRecyclerViewSelected = onRecyclerViewSelected;
     }

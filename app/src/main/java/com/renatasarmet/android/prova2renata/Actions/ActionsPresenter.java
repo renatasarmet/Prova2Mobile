@@ -17,38 +17,33 @@ import retrofit2.Response;
 public class ActionsPresenter {
     private ActionsView actionsView;
     private List<ActionEntity> actionsList;
-    private ActionListEntity actionListEntity;
 
     ActionsPresenter(ActionsView actionsView){
         this.actionsView = actionsView;
     }
 
-    protected void setAdapterList() throws FileNotFoundException {
+    protected void updateList() {
         final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
-        ActionListEntity actionListEntity = socialActionsApi.getActions();
-        if (actionListEntity != null && actionListEntity.getActions() != null) {
-            actionsView.updateList(actionListEntity.getActions());
-        }
+        socialActionsApi.getActions().enqueue(new Callback<ActionListEntity>() {
+            @Override
+            public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
+
+                ActionListEntity acoesListEntity = response.body();
+
+                if(acoesListEntity != null && acoesListEntity.getActions() != null){
+
+                    actionsView.updateList(acoesListEntity.getActions());
+
+                } else{
+                    actionsView.showMessage("Falha no login");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ActionListEntity> call, Throwable t) {
+                actionsView.showMessage("Falha no acesso ao servidor");
+            }
+        });
     }
 
-
-    void updateList(String jsonActions) throws FileNotFoundException {
-
-        //verifica se há informações no json
-        if(jsonActions != null){
-            actionListEntity = new Gson().fromJson(jsonActions, ActionListEntity.class);
-            actionsList = actionListEntity.getActions();
-            actionsView.updateList(actionsList);
-
-            //se não houver informações previamente no json, é necessário baixá-las
-        }else {
-            final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
-            socialActionsApi.getActions();
-        }
-    }
-
-    long getActionId(int position) throws IndexOutOfBoundsException {
-        return actionsList.get(position).getId();
-
-    }
 }

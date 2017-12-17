@@ -20,14 +20,11 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SocialActionsApi implements SocialActionsService{
+public class SocialActionsApi{
     private static SocialActionsApi instance;
-    ActionListEntity actionListEntity;
-//
-    private SocialActionsApi socialActionsApi;
-//    private String sessionToken;
-//
-    public static SocialActionsApi getInstance() throws FileNotFoundException {
+    private SocialActionsService socialActionsService;
+
+    public static SocialActionsApi getInstance() {
         if (instance == null) {
             instance = new SocialActionsApi();
         }
@@ -35,51 +32,25 @@ public class SocialActionsApi implements SocialActionsService{
         return instance;
     }
 
-//    private SocialActionsApi() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://dl.dropboxusercontent.com/s/50vmlj7dhfaibpj/sociais.json")
-//                .addConverterFactory(defaultConverterFactory())
-//                .build();
-//
-//        this.socialActionsService = retrofit.create(SocialActionsService.class);
-//    }
-//
+    private SocialActionsApi() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://dl.dropboxusercontent.com/")
+                .addConverterFactory(defaultConverterFactory())
+                .build();
 
-    private SocialActionsApi() throws FileNotFoundException {
-
-        Reader reader = new FileReader(new File(ClassLoader.getSystemResource("https://dl.dropboxusercontent.com/s/50vmlj7dhfaibpj/sociais.json").getFile()));
-        Gson gson = new Gson();
-        actionListEntity = gson.fromJson(reader, ActionListEntity.class);
-
-        System.out.println("Acoes: " + actionListEntity.getActions());
-
-        for (ActionEntity actionEntity : actionListEntity.getActions()) {
-            Log.d("NAME", actionEntity.getName());
-        }
+        this.socialActionsService = retrofit.create(SocialActionsService.class);
     }
 
-//    private Converter.Factory defaultConverterFactory() {
-//        Gson gson = new GsonBuilder()
-//                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-//                .create();
-//        return GsonConverterFactory.create(gson);
-//    }
-//
-//    public void setSessionToken(String sessionToken) {
-//        this.sessionToken = sessionToken;
-//    }
-//
-//    public String getSessionToken() {
-//        return sessionToken;
-//    }
-//
-//    public Call<ActionListEntity> getActions() {
-//        return socialActionsService.getActions(getSessionToken());
-//    }
-    public ActionListEntity getActions(){
-        return actionListEntity;
+    private Converter.Factory defaultConverterFactory() {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create();
+        return GsonConverterFactory.create(gson);
     }
 
 
+    public Call<ActionListEntity> getActions() {
+        return socialActionsService.getActions();
+    }
 
 }

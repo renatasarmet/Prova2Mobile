@@ -4,10 +4,10 @@ import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 
 public interface SocialActionsService {
-//    @GET("acoes_sociais")
-//    Call<ActionListEntity> getActions(@Header("Authorization") String sessionToken);
-    ActionListEntity getActions();
+
+    @GET("s/50vmlj7dhfaibpj/sociais.json")
+    Call<ActionListEntity> getActions();
+
 }
