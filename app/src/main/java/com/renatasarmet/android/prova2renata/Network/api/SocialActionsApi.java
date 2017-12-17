@@ -45,8 +45,4 @@ public class SocialActionsApi{
         return socialActionsService.getActions();
     }
 
-//    public Call<ActionDetailEntity> getActionDetail(long actionId){
-//        return socialActionsService.getActionDetail(actionId);
-//    }
-
 }

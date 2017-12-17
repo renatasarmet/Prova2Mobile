@@ -13,7 +13,4 @@ public class ActionListEntity {
     public List<ActionEntity> getActions() {
         return acoes_sociais;
     }
-
-
-
 }

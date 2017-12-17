@@ -11,6 +11,4 @@ public interface SocialActionsService {
     @GET("s/50vmlj7dhfaibpj/sociais.json")
     Call<ActionListEntity> getActions();
 
-//    @GET("s/50vmlj7dhfaibpj/sociais.json")
-//    Call<ActionDetailEntity> getActionDetail(@Query("id") long movieId);
 }

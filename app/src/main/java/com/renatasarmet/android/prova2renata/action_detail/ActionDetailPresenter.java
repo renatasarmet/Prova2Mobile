@@ -1,8 +1,5 @@
 package com.renatasarmet.android.prova2renata.action_detail;
 
-
-import android.util.Log;
-
 import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
 
 

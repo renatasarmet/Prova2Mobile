@@ -52,6 +52,33 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
+            <TextView
+                android:id="@+id/text_view_title_site"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_view_description"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/site"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/text_view_site"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_view_title_site"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:paddingBottom="15dp"/>
+
         </RelativeLayout>
 
     </ScrollView>

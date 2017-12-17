@@ -3,10 +3,8 @@ package com.renatasarmet.android.prova2renata.action_detail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
 import com.renatasarmet.android.prova2renata.R;
@@ -25,6 +23,10 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
 
     @BindView(R.id.text_view_description)
     TextView tvDescription;
+
+    @BindView(R.id.text_view_site)
+    TextView tvSite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,7 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
                 .fit()
                 .into(imgHeader);
         tvDescription.setText(actionDetailEntity.getDescription());
+        tvSite.setText(actionDetailEntity.getSite());
         setTitle(actionDetailEntity.getName());
-    }
-
-    @Override
-    public void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
