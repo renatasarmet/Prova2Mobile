@@ -1,12 +1,15 @@
 package com.renatasarmet.android.prova2renata.action_detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
 import com.renatasarmet.android.prova2renata.R;
-import com.renatasarmet.android.prova2renata.Entity.ActionDetailEntity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -15,6 +18,7 @@ import butterknife.ButterKnife;
 public class ActionDetailActivity extends AppCompatActivity implements ActionDetailView {
 
     ActionDetailPresenter actionDetailPresenter;
+    ActionEntity actionDetailEntity;
 
     @BindView(R.id.image_view_header)
     ImageView imgHeader;
@@ -26,20 +30,24 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_action_detail);
-        //insere opção de voltar na actionbar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         ButterKnife.bind(this);
 
+        actionDetailEntity = new ActionEntity();
+
+        Intent intent = getIntent();
+        long id = intent.getLongExtra("Id",0);
+        String name = intent.getStringExtra("Name");
+        String image = intent.getStringExtra("Image");
+        String description = intent.getStringExtra("Description");
+        String site = intent.getStringExtra("Site");
+
+
         actionDetailPresenter = new ActionDetailPresenter(this);
-        long idActionSelected = getIntent().getLongExtra("ACTION_ID", 0);
-        actionDetailPresenter.getActionDetail(idActionSelected);
+        actionDetailPresenter.getActionDetail(id,name,image,description,site);
 
     }
 
-    @Override
-    public void showDetails(ActionDetailEntity actionDetailEntity) {
+    public void showDetails(ActionEntity actionDetailEntity) {
         Picasso.with(this)
                 .load(actionDetailEntity.getImage())
                 .centerCrop()
@@ -51,6 +59,6 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
 
     @Override
     public void showMessage(String msg) {
-
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

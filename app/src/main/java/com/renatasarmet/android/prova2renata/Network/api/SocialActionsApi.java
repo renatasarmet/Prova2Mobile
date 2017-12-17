@@ -4,7 +4,6 @@ package com.renatasarmet.android.prova2renata.Network.api;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.renatasarmet.android.prova2renata.Entity.ActionDetailEntity;
 import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 import com.renatasarmet.android.prova2renata.Network.service.SocialActionsService;
 
@@ -46,8 +45,8 @@ public class SocialActionsApi{
         return socialActionsService.getActions();
     }
 
-    public Call<ActionDetailEntity> getActionDetail(long actionId){
-        return socialActionsService.getActionDetail(actionId);
-    }
+//    public Call<ActionDetailEntity> getActionDetail(long actionId){
+//        return socialActionsService.getActionDetail(actionId);
+//    }
 
 }

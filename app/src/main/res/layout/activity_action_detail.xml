@@ -27,7 +27,7 @@
                 android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/text_view_sinopse"
+                android:id="@+id/text_view_title_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image_view_header"
@@ -44,7 +44,7 @@
                 android:id="@+id/text_view_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_view_sinopse"
+                android:layout_below="@+id/text_view_title_description"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="15dp"

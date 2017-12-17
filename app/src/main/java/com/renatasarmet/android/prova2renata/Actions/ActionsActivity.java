@@ -36,14 +36,19 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
 
 
     @Override
-    public void updateList(List<ActionEntity> actionsList) {
+    public void updateList(final List<ActionEntity> actionsList) {
         // Seta o Adapter
         ActionsAdapter actionsAdapter = new ActionsAdapter(actionsList, this);
         actionsAdapter.setOnRecyclerViewSelected(new OnRecyclerViewSelected() {
             @Override
             public void onClick(View view, int position) {
                 Intent openDetailActivity = new Intent(ActionsActivity.this, ActionDetailActivity.class);
-                openDetailActivity.putExtra("ACTION_ID", actionsPresenter.getActionId(position));
+                openDetailActivity.putExtra("Id", actionsList.get(position).getId());
+                openDetailActivity.putExtra("Name", actionsList.get(position).getName());
+                openDetailActivity.putExtra("Image", actionsList.get(position).getImage());
+                openDetailActivity.putExtra("Description", actionsList.get(position).getDescription());
+                openDetailActivity.putExtra("Site", actionsList.get(position).getSite());
+
                 startActivity(openDetailActivity);
             }
         });

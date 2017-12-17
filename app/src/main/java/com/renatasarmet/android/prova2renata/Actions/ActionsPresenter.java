@@ -44,7 +44,7 @@ public class ActionsPresenter {
         });
     }
 
-    long getActionId(int position) throws IndexOutOfBoundsException {
-        return actionsList.get(position).getId();
-    }
+//    long getActionId(int position) throws IndexOutOfBoundsException {
+//        return actionsList.get(position).getId();
+//    }
 }
