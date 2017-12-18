@@ -1,6 +1,7 @@
 package com.renatasarmet.android.prova2renata.Actions;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -38,7 +39,10 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
         ButterKnife.bind(this);
 
         actionsPresenter = new ActionsPresenter(this);
-        actionsPresenter.updateList();
+
+        String jsonActions = getIntent().getStringExtra("json_actions");
+
+        actionsPresenter.updateList(jsonActions);
     }
 
     @Override
@@ -50,9 +54,8 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+            case R.id.action_download:
+                actionsPresenter.saveActions();
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -105,4 +108,14 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
     public void hideLoading() {
         loadingLayout.setVisibility(View.GONE);
     }
+
+    @Override
+    public void saveActionsInSharedPreferences(String jsonActionEntity) {
+        //salva json das acoes para trabalhar offline
+        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.actions),MODE_PRIVATE).edit();
+        editor.putString(getString(R.string.action_entity_json), jsonActionEntity);
+        editor.apply();
+        showMessage("Informações salvas com sucesso");
+    }
+
 }

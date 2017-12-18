@@ -9,4 +9,8 @@ public interface ActionsView {
     void showMessage(String msg);
     void showLoading();
     void hideLoading();
+
+    void saveActionsInSharedPreferences(String jsonActionEntity);
+
+
 }

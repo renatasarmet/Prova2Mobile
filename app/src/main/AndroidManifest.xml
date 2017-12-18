@@ -11,14 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Actions.ActionsActivity">
+
+        <activity android:name=".Actions.ActionsActivity"
+            android:label="Social Actions" />
+
+        <activity android:name=".action_detail.ActionDetailActivity" />
+
+        <activity
+            android:name=".splash_screen.SplashScreenActivity"
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".action_detail.ActionDetailActivity" />
+
     </application>
 
 </manifest>

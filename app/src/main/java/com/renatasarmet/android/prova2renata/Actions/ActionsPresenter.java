@@ -1,5 +1,6 @@
 package com.renatasarmet.android.prova2renata.Actions;
 
+import com.google.gson.Gson;
 import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
 import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 import com.renatasarmet.android.prova2renata.Network.api.SocialActionsApi;
@@ -20,29 +21,46 @@ public class ActionsPresenter {
         this.actionsView = actionsView;
     }
 
-    protected void updateList() {
-        final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
-        actionsView.showLoading();
-        socialActionsApi.getActions().enqueue(new Callback<ActionListEntity>() {
-            @Override
-            public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
-                actionsView.hideLoading();
-                actionListEntity = response.body();
+    protected void updateList(String jsonActions) {
 
-                if(actionListEntity != null && actionListEntity.getActions() != null){
-                    actionsList = actionListEntity.getActions();
-                    actionsView.updateList(actionsList);
+        //verifica se há informações no json
+        if(jsonActions != null){
+            actionListEntity = new Gson().fromJson(jsonActions, ActionListEntity.class);
+            actionsList = actionListEntity.getActions();
+            actionsView.updateList(actionsList);
 
-                } else{
-                    actionsView.showMessage("Falha no acesso");
+            //se não houver informações previamente no json, é necessário baixá-las
+        }else {
+
+            final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
+            actionsView.showLoading();
+            socialActionsApi.getActions().enqueue(new Callback<ActionListEntity>() {
+                @Override
+                public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
+                    actionsView.hideLoading();
+                    actionListEntity = response.body();
+
+                    if (actionListEntity != null && actionListEntity.getActions() != null) {
+                        actionsList = actionListEntity.getActions();
+                        actionsView.updateList(actionsList);
+
+                    } else {
+                        actionsView.showMessage("Falha no acesso");
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ActionListEntity> call, Throwable t) {
-                actionsView.hideLoading();
-                actionsView.showMessage("Falha no acesso ao servidor");
-            }
-        });
+                @Override
+                public void onFailure(Call<ActionListEntity> call, Throwable t) {
+                    actionsView.hideLoading();
+                    actionsView.showMessage("Falha no acesso ao servidor");
+                }
+            });
+        }
     }
+
+    public void saveActions() {
+        String jsonActionEntity = new Gson().toJson(actionListEntity);
+        actionsView.saveActionsInSharedPreferences(jsonActionEntity);
+    }
+
 }
