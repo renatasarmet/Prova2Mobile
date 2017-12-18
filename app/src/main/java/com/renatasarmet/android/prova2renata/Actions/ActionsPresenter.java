@@ -55,6 +55,7 @@ public class ActionsPresenter {
                 public void onFailure(Call<ActionListEntity> call, Throwable t) {
                     actionsView.hideLoading();
                     actionsView.showMessage("Falha no acesso ao servidor");
+                    actionsView.showMessage("Nenhuma informação salva");
                 }
             });
         }

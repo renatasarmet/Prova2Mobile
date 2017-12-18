@@ -54,7 +54,6 @@ public class SplashScreenPresenter {
 
                 // Não tem nada salvo, abre normal e tenta baixar novas informações
                 else {
-                    splashScreenView.showMessage("Nenhuma informação salva");
                     splashScreenView.openActions(null);
                 }
             }
