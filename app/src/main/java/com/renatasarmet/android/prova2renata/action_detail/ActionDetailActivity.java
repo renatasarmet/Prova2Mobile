@@ -61,7 +61,6 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_download, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

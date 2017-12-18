@@ -1,6 +1,10 @@
 package com.renatasarmet.android.prova2renata.splash_screen;
 
 
+import android.os.Handler;
+import android.util.Log;
+
+import com.google.gson.Gson;
 import com.renatasarmet.android.prova2renata.Entity.ActionListEntity;
 import com.renatasarmet.android.prova2renata.Network.api.SocialActionsApi;
 
@@ -16,38 +20,49 @@ public class SplashScreenPresenter {
         this.splashScreenView = splashScreenView;
     }
 
-    protected void openApp(String jsonActions) {
+    protected void openApp(final String jsonActions) {
 
-        if(jsonActions!=null) {
-            splashScreenView.openActions(jsonActions);
-        }
-        else{
-            splashScreenView.openActions();
-        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Executa ações em no mínimo 2 segundos
+                if (jsonActions != null) {
 
-//            final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
-//            splashScreenView.showLoading();
-//            socialActionsApi.getActions().enqueue(new Callback<ActionListEntity>() {
-//                @Override
-//                public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
-//                    splashScreenView.hideLoading();
-//                    actionListEntity = response.body();
-//
-//                    if (actionListEntity != null && actionListEntity.getActions() != null) {
-//                        actionsList = actionListEntity.getActions();
-//                        actionsView.updateList(actionsList);
-//
-//                    } else {
-//                        actionsView.showMessage("Falha no acesso");
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ActionListEntity> call, Throwable t) {
-//                    splashScreenView.hideLoading();
-//                    splashScreenView.showMessage("Falha no acesso ao servidor");
-//                }
-//            });
-        //}
+                    //Testa conexão
+                    final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
+
+                    socialActionsApi.getActions().enqueue(new Callback<ActionListEntity>() {
+                        @Override
+                        public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
+
+                            // Se tiver conexão, pega novas informações e passa em forma de json para ActionsActivity
+                            ActionListEntity actionListEntity = response.body();
+                            String jsonActionsOnline = convertToJson(actionListEntity);
+                            splashScreenView.openActions(jsonActionsOnline);
+                        }
+
+                        @Override
+                        public void onFailure(Call<ActionListEntity> call, Throwable t) {
+
+                            splashScreenView.showMessage("Falha no acesso ao servidor");
+
+                            //Se não tiver conexão mas tiver o json salvo, abre informações salvas
+                            splashScreenView.openActions(jsonActions);
+                        }
+                    });
+                }
+
+                // Não tem nada salvo, abre normal e tenta baixar novas informações
+                else {
+                    splashScreenView.showMessage("Nenhuma informação salva");
+                    splashScreenView.openActions(null);
+                }
+            }
+        }, 2000);
+    }
+
+    public String convertToJson(ActionListEntity actionListEntity) {
+        String jsonActionEntity = new Gson().toJson(actionListEntity);
+        return jsonActionEntity;
     }
 }
