@@ -4,18 +4,18 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/oxford_blue</item>
-        <item name="colorPrimaryDark">@color/oxford_blue_dark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/alpha_white_12</item>
-        <item name="colorControlActivated">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
 </resources>

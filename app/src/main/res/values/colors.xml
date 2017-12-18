@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="alpha_black_50">#80000000</color>
-    <color name="oxford_blue">#32404f</color>
-    <color name="white">#FFFFFF</color>
-    <color name="cloud_burst">#213449</color>
-    <color name="alpha_white_12">#1effffff</color>
-    <color name="oxford_blue_dark">#2c3946</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>
