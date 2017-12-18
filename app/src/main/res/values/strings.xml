@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Social Action</string>
+    <string name="appname">Social Action</string>
     <string name="description">Description</string>
     <string name="site">Site</string>
     <string name="action_entity_json">action_entity_json</string>
