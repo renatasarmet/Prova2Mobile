@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.renatasarmet.android.prova2renata.Entity.ActionEntity;
@@ -28,6 +30,7 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
 
     @BindView(R.id.text_view_site)
     TextView tvSite;
+
 
 
     @Override
@@ -85,4 +88,5 @@ public class ActionDetailActivity extends AppCompatActivity implements ActionDet
         tvSite.setText(actionDetailEntity.getSite());
         setTitle(actionDetailEntity.getName());
     }
+
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.renatasarmet.android.prova2renata.action_detail.ActionDetailActivity;
@@ -26,6 +27,9 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
     RecyclerView rvActions;
 
     ActionsPresenter actionsPresenter;
+
+    @BindView(R.id.linear_layout_loading)
+    LinearLayout loadingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,4 +95,14 @@ public class ActionsActivity extends AppCompatActivity implements ActionsView {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public void showLoading() {
+        loadingLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        loadingLayout.setVisibility(View.GONE);
+    }
 }

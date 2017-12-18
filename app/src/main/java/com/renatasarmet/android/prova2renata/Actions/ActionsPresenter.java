@@ -22,10 +22,11 @@ public class ActionsPresenter {
 
     protected void updateList() {
         final SocialActionsApi socialActionsApi = SocialActionsApi.getInstance();
+        actionsView.showLoading();
         socialActionsApi.getActions().enqueue(new Callback<ActionListEntity>() {
             @Override
             public void onResponse(Call<ActionListEntity> call, Response<ActionListEntity> response) {
-
+                actionsView.hideLoading();
                 actionListEntity = response.body();
 
                 if(actionListEntity != null && actionListEntity.getActions() != null){
@@ -39,6 +40,7 @@ public class ActionsPresenter {
 
             @Override
             public void onFailure(Call<ActionListEntity> call, Throwable t) {
+                actionsView.hideLoading();
                 actionsView.showMessage("Falha no acesso ao servidor");
             }
         });

@@ -7,4 +7,6 @@ import java.util.List;
 public interface ActionsView {
     void updateList(List<ActionEntity> actionsList);
     void showMessage(String msg);
+    void showLoading();
+    void hideLoading();
 }
